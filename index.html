@@ -6,24 +6,79 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Document</title>
 
-		<link rel="stylesheet" href="assets/css/style.css" />
 		<link
 			rel="stylesheet"
 			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 			crossorigin="anonymous"
 		/>
+		<link rel="stylesheet" href="assets/css/style.css" />
 	</head>
 	<body>
-		<div class="jumbotron">
-			<h1 class="display-4">The Psychic Game</h1>
-			<h3>Guess what I'm thinking to win a prize! *</h3>
+		<div class="jumbotron row">
+			<div class="col-md-6">
+				<h1 class="display-4">The Psychic Game</h1>
+				<h3>Guess what I'm thinking to win a prize! *</h3>
+			</div>
+			<div class="col-md-6 aside"></div>
 			<ul class="list-group">
-				<li class="list-group-item">Wins:</li>
-				<li class="list-group-item">Losses:</li>
-				<li class="list-group-item">Guesses Left:</li>
-				<li class="list-group-item">Your Guesses So Far:</li>
+				<li class="list-group-item" id="Wins">Wins:</li>
+				<li class="list-group-item" id="Losses">Losses:</li>
+				<li class="list-group-item" id="guessRem">Guesses Left:</li>
+				<li class="list-group-item" id="lettersGuessed">
+					Your Guesses So Far:
+				</li>
 			</ul>
 		</div>
+		<script type="text/javascript">
+			//Give computer letters to choose from
+			var computerChoices = [
+				"a",
+				"b",
+				"c",
+				"d",
+				"e",
+				"f",
+				"g",
+				"h",
+				"i",
+				"j",
+				"k",
+				"l",
+				"m",
+				"n",
+				"o",
+				"p",
+				"q",
+				"r",
+				"s",
+				"t",
+				"u",
+				"v",
+				"w",
+				"x",
+				"y",
+				"z"
+			];
+			//Display base scores and set to numbers
+			var wins = 0;
+			var losses = 0;
+			var guesses = 9;
+			var guessRem = 9;
+			var lettersGuessed = [];
+			var letterToGuess = null;
+
+			//Computer selects a random letter from its array of choices
+			var comChoice =
+				computerChoices[Math.floor(Math.random() * computerChoices.length)];
+			document.querySelector(".aside").style.display = "none";
+			//Allows the user 9 guesses
+			// guesses = guesses || 9
+			function updateGuessesLeft() {
+				// Here we are grabbing the HTML element and setting it equal to the guessRem. (i.e. guessRem will get displayed in HTML)
+				document.querySelector("#guessRem").innerHTML =
+					"Guesses left: " + guessRem;
+			}
+		</script>
 	</body>
 </html>
