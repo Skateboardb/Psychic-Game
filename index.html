@@ -15,20 +15,24 @@
 		<link rel="stylesheet" href="assets/css/style.css" />
 	</head>
 	<body>
-		<div class="jumbotron row">
-			<div class="col-md-6">
-				<h1 class="display-4">The Psychic Game</h1>
-				<h3>Guess what I'm thinking to win a prize! *</h3>
+		<div class="jumbotron">
+			<div class="row">
+				<div class="col-md-6">
+					<h1 class="display-4">The Psychic Game</h1>
+					<h3>Guess what I'm thinking to win a prize! *</h3>
+				</div>
+				<div class="col-md-6 aside"></div>
 			</div>
-			<div class="col-md-6 aside"></div>
-			<ul class="list-group">
-				<li class="list-group-item" id="Wins">Wins:</li>
-				<li class="list-group-item" id="Losses">Losses:</li>
-				<li class="list-group-item" id="guessRem">Guesses Left:</li>
-				<li class="list-group-item" id="lettersGuessed">
-					Your Guesses So Far:
-				</li>
-			</ul>
+			<div class="row">
+				<ul class="list-group">
+					<li class="list-group-item" id="wins">Wins:</li>
+					<li class="list-group-item" id="losses">Losses:</li>
+					<li class="list-group-item" id="guessRem">Guesses Left:</li>
+					<li class="list-group-item" id="lettersGuessed">
+						Your Guesses So Far:
+					</li>
+				</ul>
+			</div>
 		</div>
 		<script type="text/javascript">
 			//Give computer letters to choose from
@@ -74,7 +78,7 @@
 			document.querySelector(".aside").style.display = "none";
 			//Allows the user 9 guesses
 			// guesses = guesses || 9
-			function updateGuessesLeft() {
+			function updateGuessRem() {
 				// Here we are grabbing the HTML element and setting it equal to the guessRem. (i.e. guessRem will get displayed in HTML)
 				document.querySelector("#guessRem").innerHTML =
 					"Guesses left: " + guessRem;
@@ -87,7 +91,7 @@
 			}
 
 			// Take user's guesses so far and display them as letters separated by commas.
-			function updateGuessesSoFar() {
+			function updateLettersGuessed() {
 				document.querySelector("#lettersGuessed").innerHTML =
 					"Your Guesses so far: " + lettersGuessed.join(", ");
 			}
@@ -101,18 +105,30 @@
 					document.querySelector(".aside").style.display = "none";
 				}, 5000);
 				updateLetterToGuess();
-				updateGuessesLeft();
-				updateGuessesSoFar();
+				updateGuessRem();
+				updateLettersGuessed();
 			};
 
 			updateLetterToGuess();
-			updateGuessesLeft();
+			updateGuessRem();
 
 			// User guesses on key up
 			document.onkeyup = function(event) {
-				var userGuess = String.fromCharCode(event.keyCode).toLocaleLowerCase;
+				var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 				var check = computerChoices.includes(userGuess);
 				var checkDouble = lettersGuessed.includes(userGuess);
+				// console.log(checkDouble);
+				if (check === false) {
+					console.log("invalid");
+					// alert("That was not a valid guess, try again?");
+					return false;
+				} else if (checkDouble === true) {
+					console.log("double letter");
+					// alert("That letter has already been guessed, would you try again?");
+					// return false;
+				} else if (check === true) {
+					console.log("valid");
+				}
 			};
 		</script>
 	</body>
