@@ -79,6 +79,31 @@
 				document.querySelector("#guessRem").innerHTML =
 					"Guesses left: " + guessRem;
 			}
+			// Establish letter to be guessed
+			function updateLetterToGuess() {
+				this.letterToGuess = this.computerChoices[
+					Math.floor(Math.random() * this.computerChoices.length)
+				];
+			}
+
+			// Take user's guesses so far and display them as letters separated by commas.
+			function updateGuessesSoFar() {
+				document.querySelector("#lettersGuessed").innerHTML =
+					"Your Guesses so far: " + lettersGuessed.join(", ");
+			}
+
+			// Function will be called when we reset everything
+			var reset = function() {
+				totalGuesses = 9;
+				guessesLeft = 9;
+				guessedLetters = [];
+				setTimeout(function() {
+					document.querySelector(".mantis").style.display = "none";
+				}, 5000);
+				updateLetterToGuess();
+				updateGuessesLeft();
+				updateGuessesSoFar();
+			};
 		</script>
 	</body>
 </html>
