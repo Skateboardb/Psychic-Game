@@ -94,15 +94,25 @@
 
 			// Function will be called when we reset everything
 			var reset = function() {
-				totalGuesses = 9;
-				guessesLeft = 9;
-				guessedLetters = [];
+				guesses = 9;
+				guessRem = 9;
+				lettersGuessed = [];
 				setTimeout(function() {
-					document.querySelector(".mantis").style.display = "none";
+					document.querySelector(".aside").style.display = "none";
 				}, 5000);
 				updateLetterToGuess();
 				updateGuessesLeft();
 				updateGuessesSoFar();
+			};
+
+			updateLetterToGuess();
+			updateGuessesLeft();
+
+			// User guesses on key up
+			document.onkeyup = function(event) {
+				var userGuess = String.fromCharCode(event.keyCode).toLocaleLowerCase;
+				var check = computerChoices.includes(userGuess);
+				var checkDouble = lettersGuessed.includes(userGuess);
 			};
 		</script>
 	</body>
