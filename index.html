@@ -34,6 +34,11 @@
 				</ul>
 			</div>
 		</div>
+		<footer>
+			<p>
+				*There is no real prize.
+			</p>
+		</footer>
 		<script type="text/javascript">
 			//Give computer letters to choose from
 			var computerChoices = [
@@ -140,9 +145,11 @@
 							document.querySelector("#wins").innerHTML = "Wins: " + wins;
 							userGuess = userGuess.toLocaleUpperCase();
 							document.querySelector(".aside").style.display = "";
-							document.querySelector(".aside").style.height = "3em";
+							// document.querySelector(".aside").style. = "4em";
 							document.querySelector(".aside").innerHTML =
-								"Good guess! I was in fact thinking of the letter " + userGuess;
+								"Good guess! I was in fact thinking of the letter " +
+								userGuess +
+								"!";
 							reset();
 						}
 					} else if (guessRem == 0) {
@@ -150,6 +157,7 @@
 						losses++;
 						document.querySelector("#losses").innerHTML = "Losses: " + losses;
 						document.querySelector(".aside").style.display = "";
+						// document.querySelector(".aside").style.height = "4em";
 						document.querySelector(".aside").innerHTML =
 							"Sorry, I was thinking of the letter " +
 							letterToGuess +
