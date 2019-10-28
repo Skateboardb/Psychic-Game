@@ -119,15 +119,46 @@
 				var checkDouble = lettersGuessed.includes(userGuess);
 				// console.log(checkDouble);
 				if (check === false) {
-					console.log("invalid");
-					// alert("That was not a valid guess, try again?");
+					// console.log("invalid");
+					alert("That was not a valid guess, try again?");
 					return false;
 				} else if (checkDouble === true) {
-					console.log("double letter");
-					// alert("That letter has already been guessed, would you try again?");
-					// return false;
+					// console.log("double letter");
+					alert("That letter has already been guessed, would you try again?");
+					return false;
 				} else if (check === true) {
-					console.log("valid");
+					// console.log("valid");
+					// If user's choice is an a-z char, update guesses left and add guess to lettersGuessed
+					guessRem--;
+					lettersGuessed.push(userGuess);
+					updateGuessRem();
+					updateLettersGuessed();
+
+					if (guessRem > 0) {
+						if (userGuess == letterToGuess) {
+							wins++;
+							document.querySelector("#wins").innerHTML = "Wins: " + wins;
+							userGuess = userGuess.toLocaleUpperCase();
+							document.querySelector(".aside").style.display = "";
+							document.querySelector(".aside").style.height = "3em";
+							document.querySelector(".aside").innerHTML =
+								"Good guess! I was in fact thinking of the letter " + userGuess;
+							reset();
+						}
+					} else if (guessRem == 0) {
+						//If no more guesses remain, chalk up a loss and update HTML to display it
+						losses++;
+						document.querySelector("#losses").innerHTML = "Losses: " + losses;
+						document.querySelector(".aside").style.display = "";
+						document.querySelector(".aside").innerHTML =
+							"Sorry, I was thinking of the letter " +
+							letterToGuess +
+							". Try again?";
+						reset();
+					}
+					return false;
+				} else {
+					alert("Oops! Looks like there's an error...");
 				}
 			};
 		</script>
